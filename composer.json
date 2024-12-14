@@ -1,0 +1,18 @@
+{
+    "name": "openvoid/ward",
+    "description": "PHP validator class Ward",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "OpenVoid\\Ward\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Antonio Obradovic",
+            "email": "antonio@obradovic.dev"
+        }
+    ],
+    "require": {}
+}
