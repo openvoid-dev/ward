@@ -15,17 +15,17 @@ class IntWard implements WardsInterface
         }
     }
 
-    protected bool $nullable = false;
+    public bool $nullable = false;
 
     /**
      * @var int|null
      */
-    private ?int $min;
+    private ?int $min = null;
 
     /**
      * @var int|null
      */
-    private ?int $max;
+    private ?int $max = null;
 
     public function __construct(string $item_name)
     {
@@ -38,6 +38,8 @@ class IntWard implements WardsInterface
             $this->invalid_message = "$this->name must be an integer";
 
             return false;
+        } elseif (empty($value) && $this->nullable) {
+            return true;
         }
 
         if (!ctype_digit(strval($value))) {

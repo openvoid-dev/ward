@@ -15,7 +15,7 @@ class StringWard implements WardsInterface
         }
     }
 
-    protected bool $nullable = false;
+    public bool $nullable = false;
 
     protected ?int $min = null;
 
@@ -30,18 +30,28 @@ class StringWard implements WardsInterface
     {
         // * Check if its null and null is allowed
         if (empty($value) && !$this->nullable) {
+            $this->invalid_message = "$this->name is required";
+
             return false;
+        } elseif (empty($value) && $this->nullable) {
+            return true;
         }
 
         if (!is_string($value)) {
+            $this->invalid_message = "$this->name must be a string";
+
             return false;
         }
 
         if (is_int($this->min) && strlen($value) < $this->min) {
+            $this->invalid_message = "$this->name must be at least $this->min characters long";
+
             return false;
         }
 
-        if (is_int($this->max) && strlen($value)> $this->max) {
+        if (is_int($this->max) && strlen($value) > $this->max) {
+            $this->invalid_message = "$this->name must be at most $this->max characters long";
+
             return false;
         }
 
@@ -67,12 +77,5 @@ class StringWard implements WardsInterface
         $this->max = $max;
 
         return $this;
-    }
-
-
-
-    public function invalid_message(string $invalid_message): WardsInterface
-    {
-        // TODO: Implement invalid_message() method.
     }
 }

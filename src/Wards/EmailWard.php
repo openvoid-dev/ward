@@ -22,7 +22,7 @@ class EmailWard implements WardsInterface
         }
     }
 
-    protected bool $nullable = false;
+    public bool $nullable = false;
 
     public function __construct(string $item_name)
     {
